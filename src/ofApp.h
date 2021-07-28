@@ -11,6 +11,7 @@ class ofApp : public ofBaseApp{
 
 		struct Particle {
 			glm::vec4 pos;
+			glm::vec4 angle;
 		};
 
 		struct Cell {
@@ -45,6 +46,7 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+		void setParameters();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -59,14 +61,37 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		ofxPanel gui;
 		ofShader fragShader;
-		ofShader computeShader;
+		ofShader trailMapComputeShader;
 		ofShader particleComputeShader;
-		ofxFloatSlider radius;
-		ofxColorSlider colorSlider;
+		ofxFloatSlider steerSlider;
+		ofxFloatSlider angleSlider;
+		ofxFloatSlider senseDistanceSlider;
+		ofxFloatSlider diffuseRateSlider;
+		ofxFloatSlider decayRateSlider;
+		ofxFloatSlider speedSlider;
+		ofxFloatSlider maxTrailDensitySlider;
+		ofxIntSlider sensorSizeSlider;
+		ofxToggle speedAffectedByTrailDensityToggle;
+		ofxColorSlider minColorSlider;
+		ofxColorSlider maxColorSlider;
 		ofColor color;
-
 		pingPongBuffer doubleBufferedTrailMap;
 		vector<Cell> trailMapSize;
 		ofBufferObject particleBuffer;
 		vector<Particle> particleSize;
+
+		float steerStrength = 6.0;
+		float senseAngle = 6.0;
+		float senseDistance = 6.0;
+		float decayRate = 0.01;
+		float diffuseRate = 0.6;
+		float speed = 1;
+		float maxTrailDensity = 50.0;
+		int sensorSize = 1;
+		bool speedAffectedByTrailDensity = false;
+		ofColor minColor;
+		ofColor maxColor;
+
+		int width;
+		int height;
 };
